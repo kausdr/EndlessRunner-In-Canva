@@ -1,6 +1,6 @@
 import {toRad} from "../engine/math.mjs";
 import {animate} from "../engine/animation.mjs";
-import {down, Key} from "../engine/input.mjs";
+import {down} from "../engine/input.mjs";
 
 const canvas = document.querySelector('#canvas');
 
@@ -13,11 +13,11 @@ let velocity = SPEED;
 
 function update(time) {
     //Deslocamento da bola
-    if (down(Key.UP) && y > RADIUS) y -= velocity * time;
-    else if (down(Key.DOWN) && y <= canvas.height - RADIUS) y += velocity * time;
+    if (down('ArrowUp') && y > RADIUS) y -= velocity * time;
+    else if (down('ArrowDown') && y <= canvas.height - RADIUS) y += velocity * time;
 
-    if (down(Key.LEFT) && x > RADIUS) x -= velocity * time;
-    else if (down(Key.RIGHT) && x <= canvas.width - RADIUS) x += velocity * time;
+    if (down('ArrowLeft') && x > RADIUS) x -= velocity * time;
+    else if (down('ArrowRight') && x <= canvas.width - RADIUS) x += velocity * time;
 }
 
 function draw(ctx) {
