@@ -1,4 +1,4 @@
-import {_keyboard_use} from "./input.mjs";
+import {_keyboard_listen} from "./input.mjs";
 
 export function animate(canvas, {update = undefined, draw = undefined} = {}) {
     if (!canvas.getContext) {
@@ -6,7 +6,7 @@ export function animate(canvas, {update = undefined, draw = undefined} = {}) {
         return;
     }
 
-    _keyboard_use();
+    _keyboard_listen();
 
     const ctx = canvas.getContext('2d');
     let lastFrameTime = 0;
