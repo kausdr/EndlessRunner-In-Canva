@@ -1,27 +1,40 @@
-import {toRad} from "../engine/math.mjs";
-import {animate} from "../engine/animation.mjs";
-import {down} from "../engine/input.mjs";
+import { toRad } from "../engine/math.mjs";
+import { animate } from "../engine/animation.mjs";
+import { down } from "../engine/input.mjs";
 
 const canvas = document.querySelector('#canvas');
 
 const RADIUS = 20;
-const SPEED = 400;
 
-let x = canvas.width / 2
-let y = canvas.height / 2
-let velocity = SPEED;
+const GRAVITY = 1600;
+const JUMP_SPEED = -600; // Velocidade inicial do pulo
+
+let x = canvas.width / 2;
+let y = canvas.height - RADIUS;
+
+let velocityY = 0; // Velocidade vertical inicial
 
 function update(time) {
-    //Deslocamento da bola
-    if (down('ArrowUp') && y > RADIUS) y -= velocity * time;
-    else if (down('ArrowDown') && y <= canvas.height - RADIUS) y += velocity * time;
+    // Deslocamento da bola
+    if (down('ArrowUp') && y >= canvas.height - RADIUS) {
+        velocityY = JUMP_SPEED; // Define uma velocidade inicial para o pulo
+    }
 
-    if (down('ArrowLeft') && x > RADIUS) x -= velocity * time;
-    else if (down('ArrowRight') && x <= canvas.width - RADIUS) x += velocity * time;
+    // Lógica de movimento vertical da bola (gravidade)
+    velocityY += GRAVITY * time; // Aumento da velocidade devido à gravidade
+
+    // Atualiza a posição vertical da bola de acordo com a velocidade vertical
+    y += velocityY * time;
+
+    // Verifica se a bola atingiu o chão e redefine a posição vertical e a velocidade vertical
+    if (y + RADIUS >= canvas.height) {
+        y = canvas.height - RADIUS;
+        velocityY = 0;
+    }
 }
 
 function draw(ctx) {
-    ctx.clearRect(0, 0, 400, 400);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.beginPath();
     ctx.strokeStyle = "black";
     ctx.fillStyle = "pink";
@@ -33,4 +46,4 @@ function draw(ctx) {
     ctx.stroke();
 }
 
-animate(canvas, {update, draw})
+animate(canvas, { update, draw });
