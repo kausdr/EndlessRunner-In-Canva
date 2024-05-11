@@ -32,4 +32,23 @@ export function animate(canvas, {update = undefined, draw = undefined} = {}) {
 
     //Solicita o primeiro quadro
     window.requestAnimationFrame(onFrame);
+
+    const pedra = document.querySelector('.pedra');
+
+const loop = setInterval(() => {
+
+    console.log('loop')
+
+    const pedraPosition = pedra.offsetLeft;
+
+    if (pedraPosition <= 120 && pedraPosition > 0) {
+        pedra.style.animation = 'none';
+        pedra.style.left = `${pedraPosition}px`;
+
+        clearInterval(loop);
+    
+    }
+
+}, 10);
 }
+
