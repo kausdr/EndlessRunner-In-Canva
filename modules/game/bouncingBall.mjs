@@ -8,10 +8,13 @@ import { down } from "../engine/input.mjs";
 const pedraImg = new Image();
 pedraImg.src = 'bug.png';
 
+const bolaImg = new Image();
+bolaImg.src = 'boy.webp';
+
 const canvas = document.querySelector('#canvas');
 const ctx = canvas.getContext('2d');
 
-const RADIUS = 20;
+const RADIUS = 30;
 
 const GRAVITY = 1600;
 const JUMP_SPEED = -600; // Velocidade inicial do pulo
@@ -94,13 +97,15 @@ function update(time) {
 function draw(ctx) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     // Desenha a bola
-    ctx.beginPath();
-    ctx.strokeStyle = "black";
-    ctx.fillStyle = "pink";
-    ctx.lineWidth = 2;
-    ctx.arc(x, y, RADIUS, 0, toRad(360));
-    ctx.fill();
-    ctx.stroke();
+    // ctx.beginPath();
+    // ctx.strokeStyle = "black";
+    // ctx.fillStyle = "pink";
+    // ctx.lineWidth = 2;
+    // ctx.arc(x, y, RADIUS, 0, toRad(360));
+    // ctx.fill();
+    // ctx.stroke();
+
+    ctx.drawImage(bolaImg, x - RADIUS, y - RADIUS, RADIUS * 2, RADIUS * 2);
 
     
 
