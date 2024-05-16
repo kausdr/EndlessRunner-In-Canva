@@ -2,6 +2,12 @@ import { toRad } from "../engine/math.mjs";
 import { animate } from "../engine/animation.mjs";
 import { down } from "../engine/input.mjs";
 
+// const bolaImg = new Image();
+// bolaImg.src = 'caminho/para/sua/imagem/bola.png'; // Substitua pelo caminho da imagem da bola
+
+const pedraImg = new Image();
+pedraImg.src = 'bug.png';
+
 const canvas = document.querySelector('#canvas');
 const ctx = canvas.getContext('2d');
 
@@ -96,10 +102,16 @@ function draw(ctx) {
     ctx.fill();
     ctx.stroke();
 
+    
+
     // Desenha os obstáculos
-    ctx.fillStyle = "gray";
+    // ctx.fillStyle = "gray";
+    // obstacles.forEach(obstacle => {
+    //     ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
+    // });
+
     obstacles.forEach(obstacle => {
-        ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
+        ctx.drawImage(pedraImg, obstacle.x, obstacle.y, obstacle.width, obstacle.height);
     });
 
     // Exibe a pontuação na tela
