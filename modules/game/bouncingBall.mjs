@@ -1,70 +1,65 @@
-import { toRad } from "../engine/math.mjs";
 import { animate } from "../engine/animation.mjs";
 import { down } from "../engine/input.mjs";
-
-const pedraImg = new Image();
-pedraImg.src = 'bug.png';
-
-const bolaImg = new Image();
-bolaImg.src = 'boy.webp';
-
-const scoreImg = new Image();
-scoreImg.src = 'score.webp'; // Substitua pelo caminho da imagem do score
 
 const canvas = document.querySelector('#canvas');
 const ctx = canvas.getContext('2d');
 
-const RADIUS = 30;
+const boyImg = document.querySelector('#boy');
+const gameOverImg = document.querySelector('#gameOver');
+
+const RADIUS = 20;
 const GRAVITY = 1600;
-const JUMP_SPEED = -600; // Velocidade inicial do pulo
+const JUMP_SPEED = -600;
 
-let x = canvas.width / 2;
+let x = 100;
 let y = canvas.height - RADIUS;
-
-let velocityY = 0; // Velocidade vertical inicial
-
+let velocityY = 0;
 let obstacles = [];
 const OBSTACLE_WIDTH = 60;
 const OBSTACLE_HEIGHT = 60;
-const OBSTACLE_SPEED = 250; 
+const OBSTACLE_SPEED = 250;
+const MIN_OBSTACLE_DISTANCE = 200;
 
 let gameOver = false;
-let score = 0; 
+let score = 0;
 
 function generateObstacle() {
-    // Verifica se não há obstáculos ou se o último obstáculo está longe o suficiente    
-    if (obstacles.length === 0 || obstacles[obstacles.length - 1].x + OBSTACLE_WIDTH < canvas.width - OBSTACLE_WIDTH * 2) {
+    if (obstacles.length === 0 || (canvas.width - obstacles[obstacles.length - 1].x) >= MIN_OBSTACLE_DISTANCE) {
         const obstacle = {
             x: canvas.width,
             y: canvas.height - OBSTACLE_HEIGHT,
             width: OBSTACLE_WIDTH,
             height: OBSTACLE_HEIGHT,
+            element: createObstacleElement()
         };
         obstacles.push(obstacle);
     }
 }
 
+function createObstacleElement() {
+    const bugImg = document.createElement('img');
+    bugImg.src = 'bug.png';
+    bugImg.classList.add('bug', 'animated-gif');
+    bugImg.style.bottom = '0px';
+    document.querySelector('.game-container').appendChild(bugImg);
+    return bugImg;
+}
+
 function update(time) {
     if (gameOver) return;
 
-    // Deslocamento da bola
     if (down('ArrowUp') && y >= canvas.height - RADIUS) {
-        velocityY = JUMP_SPEED; // Define uma velocidade inicial para o pulo
+        velocityY = JUMP_SPEED;
     }
 
-    // Lógica de movimento vertical da bola (gravidade)
-    velocityY += GRAVITY * time; // Aumento da velocidade devido à gravidade
-
-    // Atualiza a posição vertical da bola de acordo com a velocidade vertical
+    velocityY += GRAVITY * time;
     y += velocityY * time;
 
-    // Verifica se a bola atingiu o chão e redefine a posição vertical e a velocidade vertical
     if (y + RADIUS >= canvas.height) {
         y = canvas.height - RADIUS;
         velocityY = 0;
     }
 
-    // Verifica colisões com os obstáculos
     obstacles.forEach(obstacle => {
         if (
             x < obstacle.x + obstacle.width &&
@@ -76,19 +71,19 @@ function update(time) {
         }
     });
 
-    // Atualiza a posição horizontal dos obstáculos
-    obstacles.forEach(obstacle => {
+    obstacles = obstacles.filter(obstacle => {
         obstacle.x -= OBSTACLE_SPEED * time;
-
-        // Remove o obstáculo se estiver fora do canvas
         if (obstacle.x + OBSTACLE_WIDTH < 0) {
-            obstacles.shift();
+            obstacle.element.remove();
             score++;
+            return false;
+        } else {
+            obstacle.element.style.left = `${obstacle.x}px`;
+            return true;
         }
     });
 
-    // Gera um novo obstáculo aleatoriamente
-    if (Math.random() < 0.01) {
+    if (Math.random() < 0.02) {
         generateObstacle();
     }
 }
@@ -96,33 +91,19 @@ function update(time) {
 function draw(ctx) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Desenha a bola
-    ctx.drawImage(bolaImg, x - RADIUS, y - RADIUS, RADIUS * 2, RADIUS * 2);
+    boyImg.style.left = `${x - RADIUS}px`;
+    boyImg.style.bottom = `${canvas.height - y - RADIUS}px`;
 
-    // Desenha os obstáculos
-    obstacles.forEach(obstacle => {
-        ctx.drawImage(pedraImg, obstacle.x, obstacle.y, obstacle.width, obstacle.height);
-    });
-
-    // Desenha a imagem do score
-    const scoreImgX = 10;
-    const scoreImgY = -10;
-    const scoreImgWidth = 100; // Ajuste conforme necessário
-    const scoreImgHeight = 70; // Ajuste conforme necessário
-    ctx.drawImage(scoreImg, scoreImgX, scoreImgY, scoreImgWidth, scoreImgHeight);
-
-    // Desenha a pontuação ao lado da imagem do score
-    const scoreTextX = scoreImgX + scoreImgWidth + 10; // 10px de espaço entre a imagem e o texto
-    const scoreTextY = scoreImgY + scoreImgHeight / 2 + 10; // Ajuste conforme necessário
     ctx.fillStyle = "black";
-    ctx.font = "30px Arial";
-    ctx.fillText(score, scoreTextX, scoreTextY);
+    ctx.font = "20px Arial";
+    ctx.fillText("Score: " + score, 10, 30);
 
-    // Se o jogo acabou, exibe mensagem de "Game Over"
     if (gameOver) {
         ctx.fillStyle = "red";
         ctx.font = "30px Arial";
-        ctx.fillText("Game Over", canvas.width / 2 - 80, canvas.height / 2);
+        gameOverImg.style.display = 'block';
+        gameOverImg.style.left = `${canvas.width / 2 - 80}px`;
+        gameOverImg.style.top = `${canvas.height / 2 - 80}px`;
     }
 }
 

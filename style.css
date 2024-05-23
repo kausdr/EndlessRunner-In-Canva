@@ -1,3 +1,4 @@
+
 body {
     margin: 0;
     padding: 0;
@@ -19,33 +20,53 @@ body {
 }
 
 #canvas {
-    margin: 20px 20px;
-    width: 800px;
-    height: 400px;
     border: 1px solid black;
 }
-.btn {
+.game-container {
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(#87CEEB, #ffe0fc);    border-bottom: 15px solid rgb(35, 168, 35);
+    border-bottom: 15px solid rgb(0, 0, 0);
+    width: 1000px;
+    height: 550px;
+    display: flex;
+}
+.animated-gif {
+    position: absolute;
+}
+#boy {
     width: 100px;
-    height: 50px;
-    font-size: larger;
-    background-color: whitesmoke;
-    border: none;
-    color:black;
 }
-
-.btn-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-}
-
-.pedra {
-    position: absolute;
-    bottom: 0;
+.bug {
     width: 60px;
-    animation: pedra-animation 1.5s infinite linear;
+}
+
+#gameOver {
+    width: 160px;
+    display: none;
+}
+
+.clouds1 {
+    position: absolute;
+    width: 400px;
+    animation: clouds-animation 15s infinite linear;
+}
+.clouds2 {
+    position: relative;
+    width: 400px;
+    height: 100px;
+    animation: clouds-animation 20s infinite linear;
+}
+
+@keyframes clouds-animation {
+    from {
+        right: -600px;
+    }
+
+    to {
+        right: 100%;
+    }
 }
 
 @keyframes fadeIn {
