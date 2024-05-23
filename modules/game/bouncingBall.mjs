@@ -38,7 +38,7 @@ function generateObstacle() {
 
 function createObstacleElement() {
     const bugImg = document.createElement('img');
-    bugImg.src = 'bug.png';
+    bugImg.src = 'images/bug.gif';
     bugImg.classList.add('bug', 'animated-gif');
     bugImg.style.bottom = '0px';
     document.querySelector('.game-container').appendChild(bugImg);

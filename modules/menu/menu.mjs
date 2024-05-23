@@ -1,4 +1,3 @@
-// menu.mjs
 window.onload = function() {
     const canvas = document.getElementById('titleCanvas');
     const ctx = canvas.getContext('2d');
