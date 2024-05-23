@@ -6,8 +6,13 @@
     <title>Endless Runner</title>
 </head>
 <body>
-    <div class="game-board">
-        <canvas id="canvas" width="1080" height="720"></canvas>
+    <div class="game-container">
+        <canvas id="canvas" width="1000" height="550"></canvas>
+        <img id="boy" class="animated-gif" src="../boy.gif" alt="Boy">
+        <img id="gameOver" class="animated-gif" src="../bug.gif" alt="Game Over" style="display: none;">
+        <img src="clouds.webp" class="clouds1">
+        <img src="clouds.webp" class="clouds2">
+    </div>
     </div>
     <script type="module" src="./modules/game/bouncingBall.mjs"></script>
 </body>
