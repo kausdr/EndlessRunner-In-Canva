@@ -7,6 +7,10 @@ const ctx = canvas.getContext('2d');
 const boyImg = document.querySelector('#boy');
 const gameOverImg = document.querySelector('#gameOver');
 
+// Criando a imagem do score programaticamente
+const scoreImg = new Image();
+scoreImg.src = 'images/score.webp'; // Substitua pelo caminho da imagem do score
+
 const RADIUS = 20;
 const GRAVITY = 1300;
 const JUMP_SPEED = -600;
@@ -94,16 +98,27 @@ function draw(ctx) {
     boyImg.style.left = `${x - RADIUS}px`;
     boyImg.style.bottom = `${canvas.height - y - RADIUS}px`;
 
-    ctx.fillStyle = "black";
-    ctx.font = "20px Arial";
-    ctx.fillText("Score: " + score, 10, 30);
+    // Desenha a imagem do score
+    const scoreImgX = 10;
+    const scoreImgY = 10;
+    const scoreImgWidth = 100; // Ajuste conforme necessário
+    const scoreImgHeight = 70; // Ajuste conforme necessário
+    ctx.drawImage(scoreImg, scoreImgX, scoreImgY, scoreImgWidth, scoreImgHeight);
 
+    // Desenha o texto do score ao lado da imagem do score
+    const scoreTextX = scoreImgX + scoreImgWidth + 10; // Ajuste conforme necessário
+    const scoreTextY = scoreImgY + scoreImgHeight / 2 + 10; // Ajuste conforme necessário
+    ctx.fillStyle = "black";
+    ctx.font = "30px Arial";
+    ctx.fillText(score, scoreTextX, scoreTextY);
+
+    // Se o jogo acabou, exibe mensagem de "Game Over"
     if (gameOver) {
         ctx.fillStyle = "red";
         ctx.font = "30px Arial";
         gameOverImg.style.display = 'block';
-        gameOverImg.style.left = `${canvas.width / 2 - 80}px`;
-        gameOverImg.style.top = `${canvas.height / 2 - 80}px`;
+        gameOverImg.style.left = `${canvas.width / 2 - 200}px`;
+        gameOverImg.style.top = `${canvas.height / 2 - 100}px`;
     }
 }
 
