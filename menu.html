@@ -2,17 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="menu.css">
+    <link rel="stylesheet" href="styles/menu.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Endless Runner</title>
 </head>
 <body>
     <div class="menu">
+        <canvas id="titleCanvas" width="900" height="200"></canvas>
         <div class="btn-container">
-        <button class="btn" onclick="window.location.href = 'index.html'">Jogar</button><br>
-        <button class="btn" onclick="window.location.href = 'sobre.html'">Sobre</button><br>
-        <button class="btn" onclick="window.location.href = 'sair.html'">Sair</button><br>
+            <button class="btn" onclick="window.location.href = 'index.html'">Jogar</button><br>
+            <button class="btn" onclick="window.location.href = 'sobre.html'">Sobre</button><br>
+            <button class="btn" onclick="window.location.href = 'sair.html'">Sair</button><br>
         </div>
     </div>
+    <script type="module" src="modules\menu\menu.mjs"></script>
 </body>
 </html>

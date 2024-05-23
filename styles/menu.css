@@ -75,3 +75,10 @@ body {
         transform: translateX(0);
     }
 }
+
+#titleCanvas {
+    display: block;
+    margin: 20px auto;
+    width: 800px; /* Correspondente ao atributo width do canvas no HTML */
+    height: 200px; /* Correspondente ao atributo height do canvas no HTML */
+}

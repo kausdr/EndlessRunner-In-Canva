@@ -3,16 +3,16 @@ import { animate } from "../engine/animation.mjs";
 import { down } from "../engine/input.mjs";
 
 const pedraImg = new Image();
-pedraImg.src = 'bug.png';
+pedraImg.src = 'images/bug.png';
 
 const bolaImg = new Image();
-bolaImg.src = 'bug.gif';
+bolaImg.src = 'images/boy.webp';
 
 const scoreImg = new Image();
-scoreImg.src = 'score.webp'; // Substitua pelo caminho da imagem do score
+scoreImg.src = 'images/score.webp'; // Substitua pelo caminho da imagem do score
 
 const gameOverImg = new Image();
-gameOverImg.src = 'gameover.png'; // Substitua pelo caminho da imagem de Game Over
+gameOverImg.src = 'images/gameover.png'; // Substitua pelo caminho da imagem de Game Over
 
 const canvas = document.querySelector('#canvas');
 const ctx = canvas.getContext('2d');
