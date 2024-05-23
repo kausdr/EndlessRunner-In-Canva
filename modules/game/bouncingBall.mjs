@@ -2,20 +2,19 @@ import { toRad } from "../engine/math.mjs";
 import { animate } from "../engine/animation.mjs";
 import { down } from "../engine/input.mjs";
 
-// const bolaImg = new Image();
-// bolaImg.src = 'caminho/para/sua/imagem/bola.png'; // Substitua pelo caminho da imagem da bola
-
 const pedraImg = new Image();
 pedraImg.src = 'bug.png';
 
 const bolaImg = new Image();
 bolaImg.src = 'boy.webp';
 
+const scoreImg = new Image();
+scoreImg.src = 'score.webp'; // Substitua pelo caminho da imagem do score
+
 const canvas = document.querySelector('#canvas');
 const ctx = canvas.getContext('2d');
 
 const RADIUS = 30;
-
 const GRAVITY = 1600;
 const JUMP_SPEED = -600; // Velocidade inicial do pulo
 
@@ -33,8 +32,8 @@ let gameOver = false;
 let score = 0; 
 
 function generateObstacle() {
-// Verifica se não há obstáculos ou se o último obstáculo está longe o suficiente    
-if (obstacles.length === 0 || obstacles[obstacles.length - 1].x + OBSTACLE_WIDTH < canvas.width - OBSTACLE_WIDTH * 2) {
+    // Verifica se não há obstáculos ou se o último obstáculo está longe o suficiente    
+    if (obstacles.length === 0 || obstacles[obstacles.length - 1].x + OBSTACLE_WIDTH < canvas.width - OBSTACLE_WIDTH * 2) {
         const obstacle = {
             x: canvas.width,
             y: canvas.height - OBSTACLE_HEIGHT,
@@ -96,33 +95,28 @@ function update(time) {
 
 function draw(ctx) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    // Desenha a bola
-    // ctx.beginPath();
-    // ctx.strokeStyle = "black";
-    // ctx.fillStyle = "pink";
-    // ctx.lineWidth = 2;
-    // ctx.arc(x, y, RADIUS, 0, toRad(360));
-    // ctx.fill();
-    // ctx.stroke();
 
+    // Desenha a bola
     ctx.drawImage(bolaImg, x - RADIUS, y - RADIUS, RADIUS * 2, RADIUS * 2);
 
-    
-
     // Desenha os obstáculos
-    // ctx.fillStyle = "gray";
-    // obstacles.forEach(obstacle => {
-    //     ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
-    // });
-
     obstacles.forEach(obstacle => {
         ctx.drawImage(pedraImg, obstacle.x, obstacle.y, obstacle.width, obstacle.height);
     });
 
-    // Exibe a pontuação na tela
+    // Desenha a imagem do score
+    const scoreImgX = 10;
+    const scoreImgY = -10;
+    const scoreImgWidth = 100; // Ajuste conforme necessário
+    const scoreImgHeight = 70; // Ajuste conforme necessário
+    ctx.drawImage(scoreImg, scoreImgX, scoreImgY, scoreImgWidth, scoreImgHeight);
+
+    // Desenha a pontuação ao lado da imagem do score
+    const scoreTextX = scoreImgX + scoreImgWidth + 10; // 10px de espaço entre a imagem e o texto
+    const scoreTextY = scoreImgY + scoreImgHeight / 2 + 10; // Ajuste conforme necessário
     ctx.fillStyle = "black";
-    ctx.font = "20px Arial";
-    ctx.fillText("Score: " + score, 10, 30);
+    ctx.font = "30px Arial";
+    ctx.fillText(score, scoreTextX, scoreTextY);
 
     // Se o jogo acabou, exibe mensagem de "Game Over"
     if (gameOver) {
