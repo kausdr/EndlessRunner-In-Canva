@@ -6,7 +6,7 @@ const pedraImg = new Image();
 pedraImg.src = 'bug.png';
 
 const bolaImg = new Image();
-bolaImg.src = 'boy.webp';
+bolaImg.src = 'bug.gif';
 
 const scoreImg = new Image();
 scoreImg.src = 'score.webp'; // Substitua pelo caminho da imagem do score
@@ -15,8 +15,8 @@ const canvas = document.querySelector('#canvas');
 const ctx = canvas.getContext('2d');
 
 const RADIUS = 30;
-const GRAVITY = 1600;
-const JUMP_SPEED = -600; // Velocidade inicial do pulo
+const GRAVITY = 1200;
+const JUMP_SPEED = -500; // Velocidade inicial do pulo
 
 let x = canvas.width / 2;
 let y = canvas.height - RADIUS;
@@ -27,13 +27,14 @@ let obstacles = [];
 const OBSTACLE_WIDTH = 60;
 const OBSTACLE_HEIGHT = 60;
 const OBSTACLE_SPEED = 250; 
+const MIN_DISTANCE_BETWEEN_OBSTACLES = 100;
 
 let gameOver = false;
 let score = 0; 
 
 function generateObstacle() {
     // Verifica se não há obstáculos ou se o último obstáculo está longe o suficiente    
-    if (obstacles.length === 0 || obstacles[obstacles.length - 1].x + OBSTACLE_WIDTH < canvas.width - OBSTACLE_WIDTH * 2) {
+    if (obstacles.length === 0 || obstacles[obstacles.length - 1].x + OBSTACLE_WIDTH < canvas.width - OBSTACLE_WIDTH * 2 - MIN_DISTANCE_BETWEEN_OBSTACLES) {
         const obstacle = {
             x: canvas.width,
             y: canvas.height - OBSTACLE_HEIGHT,
@@ -97,7 +98,8 @@ function draw(ctx) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     // Desenha a bola
-    ctx.drawImage(bolaImg, x - RADIUS, y - RADIUS, RADIUS * 2, RADIUS * 2);
+    // ctx.drawImage(bolaImg, x - RADIUS, y - RADIUS, RADIUS * 4, RADIUS * 4);
+    ctx.drawImage(bolaImg, x - RADIUS * 3, y - RADIUS * 3, RADIUS * 4, RADIUS * 4);
 
     // Desenha os obstáculos
     obstacles.forEach(obstacle => {

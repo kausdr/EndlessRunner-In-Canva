@@ -20,8 +20,8 @@ body {
 
 #canvas {
     margin: 20px 20px;
-    width: 800px;
-    height: 400px;
+    width: 1080px;
+    height: 720px;
     border: 1px solid black;
 }
 .btn {
