@@ -11,12 +11,15 @@ bolaImg.src = 'bug.gif';
 const scoreImg = new Image();
 scoreImg.src = 'score.webp'; // Substitua pelo caminho da imagem do score
 
+const gameOverImg = new Image();
+gameOverImg.src = 'gameover.png'; // Substitua pelo caminho da imagem de Game Over
+
 const canvas = document.querySelector('#canvas');
 const ctx = canvas.getContext('2d');
 
 const RADIUS = 30;
-const GRAVITY = 1200;
-const JUMP_SPEED = -500; // Velocidade inicial do pulo
+const GRAVITY = 1300;
+const JUMP_SPEED = -600; // Velocidade inicial do pulo
 
 let x = canvas.width / 2;
 let y = canvas.height - RADIUS;
@@ -27,14 +30,13 @@ let obstacles = [];
 const OBSTACLE_WIDTH = 60;
 const OBSTACLE_HEIGHT = 60;
 const OBSTACLE_SPEED = 250; 
-const MIN_DISTANCE_BETWEEN_OBSTACLES = 100;
 
 let gameOver = false;
 let score = 0; 
 
 function generateObstacle() {
     // Verifica se não há obstáculos ou se o último obstáculo está longe o suficiente    
-    if (obstacles.length === 0 || obstacles[obstacles.length - 1].x + OBSTACLE_WIDTH < canvas.width - OBSTACLE_WIDTH * 2 - MIN_DISTANCE_BETWEEN_OBSTACLES) {
+    if (obstacles.length === 0 || obstacles[obstacles.length - 1].x + OBSTACLE_WIDTH < canvas.width - OBSTACLE_WIDTH * 2) {
         const obstacle = {
             x: canvas.width,
             y: canvas.height - OBSTACLE_HEIGHT,
@@ -98,7 +100,6 @@ function draw(ctx) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     // Desenha a bola
-    // ctx.drawImage(bolaImg, x - RADIUS, y - RADIUS, RADIUS * 4, RADIUS * 4);
     ctx.drawImage(bolaImg, x - RADIUS * 3, y - RADIUS * 3, RADIUS * 4, RADIUS * 4);
 
     // Desenha os obstáculos
@@ -120,11 +121,13 @@ function draw(ctx) {
     ctx.font = "30px Arial";
     ctx.fillText(score, scoreTextX, scoreTextY);
 
-    // Se o jogo acabou, exibe mensagem de "Game Over"
+    // Se o jogo acabou, exibe a imagem de "Game Over"
     if (gameOver) {
-        ctx.fillStyle = "red";
-        ctx.font = "30px Arial";
-        ctx.fillText("Game Over", canvas.width / 2 - 80, canvas.height / 2);
+        const gameOverImgX = canvas.width / 2 - 200; // Ajuste conforme necessário
+        const gameOverImgY = canvas.height / 2 - 100; // Ajuste conforme necessário
+        const gameOverImgWidth = 400; // Ajuste conforme necessário
+        const gameOverImgHeight = 200; // Ajuste conforme necessário
+        ctx.drawImage(gameOverImg, gameOverImgX, gameOverImgY, gameOverImgWidth, gameOverImgHeight);
     }
 }
 
