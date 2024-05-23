@@ -8,7 +8,7 @@ const boyImg = document.querySelector('#boy');
 const gameOverImg = document.querySelector('#gameOver');
 
 const RADIUS = 20;
-const GRAVITY = 1600;
+const GRAVITY = 1300;
 const JUMP_SPEED = -600;
 
 let x = 100;
