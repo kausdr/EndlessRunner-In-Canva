@@ -1,9 +1,6 @@
-document.addEventListener('DOMContentLoaded', (event) => {
-    var music = document.getElementById("music");
-    music.play().catch(function(e) {
-        console.log('Playback prevented:', e); 
-    });
-});
+var music = document.getElementById("music");
+music.play();
+
 
 window.onload = function() {
     const canvas = document.getElementById('titleCanvas');
