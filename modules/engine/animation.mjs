@@ -1,5 +1,7 @@
 import { _keyboard_listen } from "./input.mjs";
 
+let animationFrameId;
+
 export function animate(canvas, { update = undefined, draw = undefined } = {}) {
     if (!canvas.getContext) {
         alert("Canvas not available!");
@@ -20,8 +22,15 @@ export function animate(canvas, { update = undefined, draw = undefined } = {}) {
             ctx.restore();
         }
         lastFrameTime = time;
-        window.requestAnimationFrame(onFrame);
+        animationFrameId = window.requestAnimationFrame(onFrame);
     }
 
-    window.requestAnimationFrame(onFrame);
+    animationFrameId = window.requestAnimationFrame(onFrame);
+}
+
+export function stopAnimation() {
+    if (animationFrameId) {
+        window.cancelAnimationFrame(animationFrameId);
+        animationFrameId = null;
+    }
 }

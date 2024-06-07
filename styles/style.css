@@ -1,4 +1,3 @@
-
 body {
     margin: 0;
     padding: 0;
@@ -22,29 +21,42 @@ body {
 #canvas {
     border: 1px solid black;
 }
+
 .game-container {
     margin: 0 auto;
     position: relative;
     overflow: hidden;
-    background: linear-gradient(#87CEEB, #ffe0fc);    border-bottom: 15px solid rgb(35, 168, 35);
+    background: linear-gradient(#87CEEB, #ffe0fc);    
+    border-bottom: 15px solid rgb(35, 168, 35);
     border-bottom: 15px solid rgb(0, 0, 0);
     width: 1000px;
     height: 550px;
     display: flex;
 }
+
 .animated-gif {
     position: absolute;
 }
+
 #boy {
     width: 100px;
+    z-index: 10; /* Certifique-se de que o personagem esteja na frente dos obstáculos */
 }
+
 .bug {
     width: 60px;
+    position: absolute; /* Certifique-se de que os obstáculos sejam posicionados corretamente */
+    bottom: 0px; /* Posiciona no fundo da tela */
 }
 
 #gameOver {
     width: 400px;
     display: none;
+    z-index: 20; /* Mensagem de game over na camada mais alta */
+}
+
+.clouds1, .clouds2 {
+    z-index: 5; /* Nuvens em uma camada intermediária */
 }
 
 .clouds1 {
@@ -52,11 +64,43 @@ body {
     width: 400px;
     animation: clouds-animation 15s infinite linear;
 }
+
 .clouds2 {
     position: relative;
     width: 400px;
     height: 100px;
     animation: clouds-animation 20s infinite linear;
+}
+
+#score-container {
+    position: absolute;
+    top: 10px;
+    left: 50px;
+    z-index: 15; /* Score na frente das nuvens */
+    display: flex;
+    align-items: center;
+}
+
+#score-img {
+    width: 100px; /* Ajuste conforme necessário */
+    height: 70px; /* Ajuste conforme necessário */
+}
+
+#score-text {
+    font-size: 30px;
+    color: black;
+    margin-left: 10px; /* Espaço entre a imagem do score e o texto */
+}
+
+#restart-message {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    color: black;
+    display: none;
+    z-index: 20; /* Certifique-se de que a mensagem esteja na frente das nuvens */
 }
 
 @keyframes clouds-animation {
