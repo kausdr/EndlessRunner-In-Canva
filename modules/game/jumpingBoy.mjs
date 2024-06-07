@@ -79,6 +79,9 @@ function resetGame() {
 }
 
 function update(time) {
+    var jumpSound = document.getElementById("jumpSound");
+    var gameOverSound = document.getElementById("gameOverSound");
+
     if (gameOver) return;
 
     if (down('ArrowUp') && y >= canvas.height - RADIUS) {
@@ -101,6 +104,7 @@ function update(time) {
             y + RADIUS > obstacle.y
         ) {
             gameOver = true;
+            gameOverSound.play();
             stopAnimation(); // Stop the animation when game over
             gameOverImg.style.display = 'block';
             gameOverImg.style.left = `${canvas.width / 2 - 200}px`;
@@ -113,6 +117,7 @@ function update(time) {
         obstacle.x -= obstacleSpeed * time;
         if (obstacle.x + OBSTACLE_WIDTH < 0) {
             obstacle.element.remove();
+            jumpSound.play();
             score++;
             return false;
         } else {

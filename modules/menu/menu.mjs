@@ -1,3 +1,10 @@
+document.addEventListener('DOMContentLoaded', (event) => {
+    var music = document.getElementById("music");
+    music.play().catch(function(e) {
+        console.log('Playback prevented:', e); 
+    });
+});
+
 window.onload = function() {
     const canvas = document.getElementById('titleCanvas');
     const ctx = canvas.getContext('2d');
@@ -30,4 +37,5 @@ window.onload = function() {
 
         requestAnimationFrame(animate);
     }
+
 };

@@ -3,9 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="styles/style.css">
-    <title>Endless Runner</title>
+    <link rel="icon" href="images/bug.gif" type="image/gif">
+    <title>BugRunner</title>
 </head>
 <body>
+    <audio id="music" src="images/music.mp3" autoplay></audio>
+    <audio id="jumpSound" src="images/jumpSound.mp3" autoplay></audio>
+    <audio id="gameOverSound" src="images/gameOverSound.mp3" autoplay></audio>
+
     <div class="game-container">
         <canvas id="canvas" width="1000" height="550"></canvas>
         <img id="boy" class="animated-gif" src="images/boy.gif" alt="Boy">
@@ -19,5 +24,6 @@
         <div id="restart-message" style="display: none;">Pressione ENTER para recomeçar</div>
     </div>
     <script type="module" src="./modules/game/jumpingBoy.mjs"></script>
+    <script type="module" src="modules\menu\menu.mjs"></script>
 </body>
 </html>
