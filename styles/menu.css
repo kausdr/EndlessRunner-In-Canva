@@ -79,6 +79,6 @@ body {
 #titleCanvas {
     display: block;
     margin: 20px auto;
-    width: 800px; /* Correspondente ao atributo width do canvas no HTML */
-    height: 200px; /* Correspondente ao atributo height do canvas no HTML */
+    width: 800px;
+    height: 200px;
 }

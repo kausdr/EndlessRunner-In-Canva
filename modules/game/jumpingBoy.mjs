@@ -66,16 +66,15 @@ function createObstacleElement() {
     bugImg.classList.add('bug', 'animated-gif');
     bugImg.style.position = 'absolute';
     bugImg.style.bottom = '0px';
-    bugImg.style.left = `${canvas.width}px`; // Inicialmente fora da tela à direita
+    bugImg.style.left = `${canvas.width}px`;
     document.querySelector('.game-container').appendChild(bugImg);
     return bugImg;
 }
 
 function resetGame() {
-    stopAnimation(); // Stop the previous animation frame
-    // Remove all existing obstacle elements from the DOM
+    stopAnimation();
     obstacles.forEach(obstacle => obstacle.element.remove());
-    initializeGame(); // Reinitialize game state
+    initializeGame();
 }
 
 function update(time) {
@@ -105,7 +104,7 @@ function update(time) {
         ) {
             gameOver = true;
             gameOverSound.play();
-            stopAnimation(); // Stop the animation when game over
+            stopAnimation();
             gameOverImg.style.display = 'block';
             gameOverImg.style.left = `${canvas.width / 2 - 200}px`;
             gameOverImg.style.top = `${canvas.height / 2 - 100}px`;
@@ -144,10 +143,8 @@ function draw(ctx) {
     boyImg.style.left = `${x - RADIUS}px`;
     boyImg.style.bottom = `${canvas.height - y - RADIUS - 18}px`;
 
-    // Atualiza o texto do score
     scoreText.textContent = score;
 
-    // Se o jogo acabou, exibe mensagem de "Game Over"
     if (gameOver) {
         ctx.fillStyle = "red";
         ctx.font = "30px Arial";
@@ -157,5 +154,4 @@ function draw(ctx) {
     }
 }
 
-// Inicializa a animação no início
 initializeGame();
