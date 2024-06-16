@@ -6,6 +6,6 @@ Open with Live Server
 
 Developed by:
 
-Ana Cezanoski
-Kauane Santana
-Lucas Nascimento
+Ana Cezanoski<br>
+Kauane Santana<br>
+Lucas Nascimento<br>
